@@ -1,0 +1,24 @@
+{
+  "name": "finance-logic-js",
+  "version": "1.0.0",
+  "description": "sample test description",
+  "main": "./finance.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephpung/finance-logic-js.git"
+  },
+  "author": "Joseph Pung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/josephpung/finance-logic-js/issues"
+  },
+  "homepage": "https://github.com/josephpung/finance-logic-js#readme",
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "moment": "^2.22.1",
+    "q": "^1.5.1"
+  }
+}
