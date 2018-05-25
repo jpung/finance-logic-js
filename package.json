@@ -13,9 +13,9 @@
   "author": "Joseph Pung",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/josephpung/finance-logic-js/issues"
+    "url": "https://github.com/leapsg/finance-logic/issues"
   },
-  "homepage": "https://github.com/josephpung/finance-logic-js#readme",
+  "homepage": "https://github.com/leapsg/finance-logic#readme",
   "dependencies": {
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
