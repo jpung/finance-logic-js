@@ -13,9 +13,11 @@ const finance = require('finance-logic-js')
 finance.GenAmortizationSchedule()
 
 or (ES6)
-import { GenAmortizationSchedule } from 'node-finance'
+import { GenAmortizationSchedule } from 'finance-logic-js'
 
 ```
+
+
 GenAmortizationSchedule
 -----------------------
 This function generates an amortization schedule. The schedule is returned as a Javascript object.
