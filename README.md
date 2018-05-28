@@ -28,12 +28,8 @@ The function accepts the following arguments:
 * rate (required): the annual interest rate of the loan expressed as a percentage, e.g., 10.5
 * firstPaymentDate (optional): the date the first payment will be made
 * frequency (optional): the payment frequency, which can be any of the following:
-    semimonthly - twice a month
-    monthly - once each month
-    bimonthly - every two months
-    quarterly - every quarter
-    semiannually - ever 6 months
-    annually - ever 12 months
+    12 - monthly
+    6 - half yearly
     none or one - only one payment at the end of the loan - typically don't mix this with balloonDate
 * balloonDate (optional): the date a balloon payment will be made. This date will be forced to earliest
 corresponding payment date. This date will be ignored if it is greater than the term (months) of the

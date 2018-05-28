@@ -531,7 +531,7 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
         if (!calculator.isRequiredPositiveInteger(NPER)) throw new Error('NPER' + calculator.validationErrors[1]);
         if (!calculator.isRequiredPositiveNumber(rate)) throw new Error('rate' + calculator.validationErrors[0]);
         if (firstPaymentDate.constructor !== Date) throw new Error('firstPaymentDate must be Javascript Date');
-        if(typeof frequency !== 'string') throw new Error('frequency must be a string');
+        if(typeof frequency !== 'number') throw new Error('frequency must be a string');
         if (balloonDate && balloonDate.constructor !== Date) throw new Error('balloonDate must be Javascript Date');
         if (callback && !calculator.isFunction(callback)) throw new Error('callback', calculator.validationErrors[3]);
 
@@ -544,36 +544,39 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
         rate = rate / 100;
         var semimonthly = false;
 
-        if (!frequency || frequency === 'monthly') {
-            payments = NPER;
-            rate = rate / 12;
-            dateOffset = 1;
-        } else if (frequency.toLowerCase() === 'semimonthly') {
-            (payments = NPER * 2).toInteger();
-            rate = rate / 12 / 2;
-            semimonthly = true;
-            dateOffset = parseInt(365.25 / 12 / 2);
-        } else if (frequency.toLowerCase() === 'bimonthly') {
-            payments = (NPER / 2).toInteger();
-            rate = rate / 12 * 2;
-            dateOffset = 2;
-        } else if (frequency.toLowerCase() === 'quarterly') {
-            payments = (NPER / 4).toInteger();
-            rate = rate / 12 * 4;
-            dateOffset = 4;
-        } else if (frequency.toLowerCase() === 'semiannually') {
-            payments = (NPER / 6).toInteger();
-            rate = rate / 12 * 6;
-            dateOffset = 6;
-        } else if (frequency.toLowerCase() === 'annually') {
-            payments = (NPER / 12).toInteger();
-            rate = rate / 12 * 12;
-            dateOffset = 12;
-        } else if (frequency.toLowerCase() === 'none' || frequency.toLowerCase() === 'one') {
-            payments = 1;
-            rate = rate * (NPER / 12);
-            dateOffset = payments;
-        }
+        payments = (NPER / (12/frequency)).toInteger();
+        rate = rate / frequency;
+        dateOffset = 12/frequency;
+        // if (!frequency || frequency === 'monthly') {
+        //     payments = NPER;
+        //     rate = rate / 12;
+        //     dateOffset = 1;
+        // } else if (frequency.toLowerCase() === 'semimonthly') {
+        //     (payments = NPER * 2).toInteger();
+        //     rate = rate / 12 / 2;
+        //     semimonthly = true;
+        //     dateOffset = parseInt(365.25 / 12 / 2);
+        // } else if (frequency.toLowerCase() === 'bimonthly') {
+        //     payments = (NPER / 2).toInteger();
+        //     rate = rate / 12 * 2;
+        //     dateOffset = 2;
+        // } else if (frequency.toLowerCase() === 'quarterly') {
+        //     payments = (NPER / 4).toInteger();
+        //     rate = rate / 12 * 4;
+        //     dateOffset = 4;
+        // } else if (frequency.toLowerCase() === 'semiannually') {
+        //     payments = (NPER / 6).toInteger();
+        //     rate = rate / 12 * 6;
+        //     dateOffset = 6;
+        // } else if (frequency.toLowerCase() === 'annually') {
+        //     payments = (NPER / 12).toInteger();
+        //     rate = rate / 12 * 12;
+        //     dateOffset = 12;
+        // } else if (frequency.toLowerCase() === 'none' || frequency.toLowerCase() === 'one') {
+        //     payments = 1;
+        //     rate = rate * (NPER / 12);
+        //     dateOffset = payments;
+        // }
 
         balloonDate = balloonDate ? moment(balloonDate) : null;
         if(balloonDate){
@@ -615,7 +618,7 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
             totalInterest += currInterest;
             currPrinciple = balloonPercent ? payment - ((balance-(PV*balloonPercent))* rate) : payment - currInterest;
             balance -= currPrinciple;
-            if(i === balloonPeriod-1){
+            if(i === payments-1){
               payment = balance + currPrinciple + currInterest;
               currPrinciple = balance + currPrinciple;
                 balance = 0;
