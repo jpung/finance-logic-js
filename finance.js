@@ -616,8 +616,8 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
             currPrinciple = balloonPercent ? payment - ((balance-(PV*balloonPercent))* rate) : payment - currInterest;
             balance -= currPrinciple;
             if(i === balloonPeriod-1){
-                payment = payment + (PV*balloonPercent) + currInterest;
-                currPrinciple = payment;
+              payment = balance + currPrinciple + currInterest;
+              currPrinciple = balance + currPrinciple;
                 balance = 0;
             }
 

@@ -38,7 +38,7 @@ The function accepts the following arguments:
 * balloonDate (optional): the date a balloon payment will be made. This date will be forced to earliest
 corresponding payment date. This date will be ignored if it is greater than the term (months) of the
 loan.
-* balloonPercent: The percentage of the principal amount that will be used as the balloon value
+* balloonPercent(required): The percentage of the principal amount that will be used as the balloon value
 
 The return object contains an array, with each array element containing the following fields:
 * paymentNumber - the number for a payment
