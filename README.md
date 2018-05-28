@@ -35,7 +35,7 @@ The function accepts the following arguments:
 corresponding payment date. This date will be ignored if it is greater than the term (months) of the
 loan.
 * balloonPercent(required): The percentage of the principal amount that will be used as the balloon value
-
+(if the balloon amount is 90% of loan principal use 0.9 etc)
 The return object contains an array, with each array element containing the following fields:
 * paymentNumber - the number for a payment
 * principle: the principal balance remaining at the end of the period
