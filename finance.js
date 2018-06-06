@@ -544,9 +544,9 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
         rate = rate / 100;
         var semimonthly = false;
 
-        payments = (NPER / (12/frequency)).toInteger();
-        rate = rate / 12 * (12/frequency)
-        dateOffset = (12/frequency)
+        payments = (NPER / (NPER/frequency)).toInteger();
+        rate = rate / 12 * (NPER/frequency)
+        dateOffset = (NPER/frequency)
         // if (!frequency || frequency === 'monthly') {
         //     payments = NPER;
         //     rate = rate / 12;
