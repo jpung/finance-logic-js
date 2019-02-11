@@ -1,6 +1,6 @@
 {
   "name": "finance-logic-js",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Finance formula generators for js. Includes amortization table for loans with balloon value/date",
   "main": "./finance.js",
   "scripts": {
