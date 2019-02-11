@@ -744,9 +744,9 @@ calculator.firstPaymentDate = function (dateFunded, firstPaymentDay, cb) {
     try {
         dateFunded = moment(dateFunded);
         if (firstPaymentDay == 1) {
-            result = dateFunded.add('M', 1).date(firstPaymentDay);
+            result = dateFunded.add(1, 'M').date(firstPaymentDay);
         } else {
-            result = dateFunded.add('M', 2).date(firstPaymentDay)
+            result = dateFunded.add(2, 'M').date(firstPaymentDay)
         }
 
         deferred.resolve(result.toISOString());
