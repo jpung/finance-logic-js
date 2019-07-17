@@ -516,7 +516,7 @@ GenAmortizationSchedule
  */
 calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate, frequency, balloonDate, balloonPercent, type, callback) {
 
-    var deferred = Q.defer();
+    const deferred = Q.defer();
     try {
         //assure we can pass promise to callback
         if (typeof PV === 'function') callback = PV;
@@ -535,14 +535,14 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
         if (balloonDate && balloonDate.constructor !== Date) throw new Error('balloonDate must be Javascript Date');
         if (callback && !calculator.isFunction(callback)) throw new Error('callback', calculator.validationErrors[3]);
 
-        var currDate = firstPaymentDate !== undefined && firstPaymentDate.constructor === Date ? moment(firstPaymentDate) : moment();
-        var dateOffset = 1;
-        var lastPaymentDate = currDate.clone().add('M', NPER);
-        var paymentDay = currDate.date();
-        var payments = 0;
-        var tempDate, tempDay, balloonPeriod;
+        const currDate = firstPaymentDate !== undefined && firstPaymentDate.constructor === Date ? moment(firstPaymentDate) : moment();
+        const dateOffset = 1;
+        const lastPaymentDate = currDate.clone().add('M', NPER);
+        const paymentDay = currDate.date();
+        const payments = 0;
+        const tempDate, tempDay, balloonPeriod;
         rate = rate / 100;
-        var semimonthly = false;
+        const semimonthly = false;
 
         payments = (NPER / (NPER/frequency)).toInteger();
         rate = rate / 12 * (NPER/frequency)
@@ -586,7 +586,7 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
                 tempDate = moment(firstPaymentDate);
                 tempDay = tempDate.date();
 
-                for (var a = 0; a < payments; a++){
+                for (const a = 0; a < payments; a++){
                     if (semimonthly) {
                         if (a.isOdd()) {
                             tempDate.add('d', dateOffset);
@@ -603,17 +603,17 @@ calculator.GenAmortizationSchedule = function (PV, NPER, rate, firstPaymentDate,
             }
         }
 
-        var balloonAmount = calculator.BalloonLoan(PV, rate, payments, null, balloonPeriod, type).balloonAmount;
+        const balloonAmount = calculator.BalloonLoan(PV, rate, payments, null, balloonPeriod, type).balloonAmount;
 
-        var obj = {};
-        var payment = balloonPercent ? calculator.PMT(PV*(1-balloonPercent), payments, rate): calculator.PMT(PV, payments, rate);
-        var balance = PV;
-        var totalInterest = 0.0;
+        const obj = {};
+        const payment = balloonPercent ? calculator.PMT(PV*(1-balloonPercent), payments, rate): calculator.PMT(PV, payments, rate);
+        const balance = PV;
+        const totalInterest = 0.0;
         obj.schedule = [];
-        var currInterest = 0;
-        var currPrinciple = 0;
+        const currInterest = 0;
+        const currPrinciple = 0;
 
-        for (var i = 0; i < payments; i++) {
+        for (const i = 0; i < payments; i++) {
             currInterest = balance * rate;
             totalInterest += currInterest;
             currPrinciple = balloonPercent ? payment - ((balance-(PV*balloonPercent))* rate) : payment - currInterest;
